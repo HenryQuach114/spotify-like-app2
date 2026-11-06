@@ -173,7 +173,7 @@ private static Scanner input = new Scanner(System.in);
 
     playerMenu(library, i);
   }
-  
+
   /*
    * controls for the song that is playing
    */
@@ -186,6 +186,7 @@ private static Scanner input = new Scanner(System.in);
       System.out.println("[S]top");
       System.out.println("[R]ewind 5 seconds");
       System.out.println("[F]orward 5 seconds");
+      System.out.println("[H]eart (favorite)");
       System.out.println("[B]ack to main menu");
       System.out.print("Enter a choice: ");
 
@@ -203,6 +204,9 @@ private static Scanner input = new Scanner(System.in);
           break;
         case "f":
           forward();
+          break;
+        case "h":
+          toggleFavorite(library, i);
           break;
         case "b":
           break;
@@ -253,6 +257,28 @@ private static Scanner input = new Scanner(System.in);
     }
     audioClip.setMicrosecondPosition(newPosition);
     System.out.println("Forwarded 5 seconds.");
+  }
+  
+  // hearts or un-hearts the song, then saves it to the json file
+  public static void toggleFavorite(Song[] library, int i) {
+    library[i].toggleFavorite();
+    if (library[i].isFavorite()) {
+      System.out.println("Added " + library[i].name() + " to your favorites.");
+    } else {
+      System.out.println("Removed " + library[i].name() + " from your favorites.");
+    }
+    saveAudioLibrary(library);
+  }
+
+  // saves the library (with favorites) back to the json file
+  public static void saveAudioLibrary(Song[] library) {
+    final String filePath = directoryPath + "/audio-library.json";
+    try (FileWriter writer = new FileWriter(filePath)) {
+      Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+      gson.toJson(library, writer);
+    } catch (Exception e) {
+      System.out.println("ERROR: unable to save " + filePath);
+    }
   }
 
   // read the audio library of music

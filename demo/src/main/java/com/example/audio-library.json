@@ -2,71 +2,81 @@
   {
     "name": "Teach Me How to Dougie",
     "artist": "Cali Swag District",
-    "year": 2010,
+    "fileName": "dougie-crop.wav",
     "genre": "Hip Hop",
-    "fileName": "dougie-crop.wav"
+    "year": 2010,
+    "IsFavorite": false
   },
   {
     "name": "Could've Been (Tik Tok Remix)",
     "artist": "H.E.R.",
-    "year": 2020,
+    "fileName": "her-crop.wav",
     "genre": "R&B",
-    "fileName": "her-crop.wav"
+    "year": 2020,
+    "IsFavorite": false
   },
   {
     "name": "On Me",
     "artist": "Lil Baby",
-    "year": 2020,
+    "fileName": "lil-baby-crop.wav",
     "genre": "Hip Hop",
-    "fileName": "lil-baby-crop.wav"
+    "year": 2020,
+    "IsFavorite": false
   },
   {
     "name": "Mo Money Mo Problems",
     "artist": "Notorios BIG",
-    "year": 1997,
+    "fileName": "biggie-crop.wav",
     "genre": "Hip Hop",
-	  "fileName": "biggie-crop.wav"
+    "year": 1997,
+    "IsFavorite": false
   },
   {
     "name": "Industry Baby",
     "artist": "Lil Nas X",
-    "year": 2021,
+    "fileName": "lil-nas-x-crop.wav",
     "genre": "Hip Hop",
-    "fileName": "lil-nas-x-crop.wav"
+    "year": 2021,
+    "IsFavorite": false
   },
   {
     "name": "How to Write an 80s Sitcom",
     "artist": "Dr Sparkles",
-    "year": 2021,
+    "fileName": "80s-sitcom.wav",
     "genre": "Power-Pop",
-    "fileName": "80s-sitcom.wav"
+    "year": 2021,
+    "IsFavorite": false
   },
   {
     "name": "Owl Eyes",
     "artist": "The Pop Winds",
-    "year": 2010,
+    "fileName": "owl-eyes.wav",
     "genre": "Synth Pop",
-    "fileName": "owl-eyes.wav"
+    "year": 2010,
+    "IsFavorite": false
   },
   {
     "name": "In the House",
     "artist": "TimTaj",
-    "year": 2023,
+    "fileName": "in-the-house.wav",
     "genre": "House",
-    "fileName": "in-the-house.wav"
+    "year": 2023,
+    "IsFavorite": false
   },
   {
     "name": "Roof",
     "artist": "Nctrnm",
-    "year": 2018,
+    "fileName": "roof.wav",
     "genre": "Trip-Hop",
-    "fileName": "roof.wav"
+    "year": 2018,
+    "IsFavorite": false
   },
   {
     "name": "The Price Of Success",
     "artist": "BoDleasons",
-    "year": 2024,
+    "fileName": "price-of-success.wav",
     "genre": "Easy Listening",
-    "fileName": "price-of-success.wav"
+    "year": 2024,
+    "IsFavorite": false
   }
 ]
