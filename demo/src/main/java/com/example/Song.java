@@ -53,7 +53,7 @@ public class Song {
     return this.isFavorite;
   }
 
-  // switches the favorite between true and false (like a heart in Spotify)
+  // switches the favorite between true and false
   public void toggleFavorite() {
     this.isFavorite = !this.isFavorite;
   }

@@ -12,6 +12,9 @@ public class SpotifyLikeAppExampleCode {
   // the current audio clip
   private static Clip audioClip;
 private static Scanner input = new Scanner(System.in);
+
+  // how far Rewind and Forward jump (5 seconds, in microseconds)
+  private static final long FIVE_SECONDS = 5_000_000;
  
 
   private static String directoryPath =
@@ -165,7 +168,91 @@ private static Scanner input = new Scanner(System.in);
       audioClip.loop(Clip.LOOP_CONTINUOUSLY);
     } catch (Exception e) {
       e.printStackTrace();
+      return; // the song didn't open, so skip the player controls
     }
+
+    playerMenu(library, i);
+  }
+  
+  /*
+   * controls for the song that is playing
+   */
+  public static void playerMenu(Song[] library, int i) {
+    String choice = "";
+    while (!choice.equals("b")) {
+      System.out.println();
+      System.out.println("---- Now Playing: " + library[i].name() + " ----");
+      System.out.println("[P]ause / resume");
+      System.out.println("[S]top");
+      System.out.println("[R]ewind 5 seconds");
+      System.out.println("[F]orward 5 seconds");
+      System.out.println("[B]ack to main menu");
+      System.out.print("Enter a choice: ");
+
+      choice = input.nextLine().toLowerCase();
+
+      switch (choice) {
+        case "p":
+          pause();
+          break;
+        case "s":
+          stop();
+          break;
+        case "r":
+          rewind();
+          break;
+        case "f":
+          forward();
+          break;
+        case "b":
+          break;
+        default:
+          System.out.println("Not a choice, try again.");
+          break;
+      }
+    }
+  }
+
+  // pauses the song, or resumes it from the same spot if it's paused
+  public static void pause() {
+    if (audioClip.isRunning()) {
+      audioClip.stop(); // stop() keeps the position
+      System.out.println("Paused. Press P to resume.");
+    } else {
+      audioClip.loop(Clip.LOOP_CONTINUOUSLY); // continue where it left off
+      System.out.println("Playing.");
+    }
+  }
+
+  // stops the song and goes back to the beginning
+  public static void stop() {
+    audioClip.stop();
+    audioClip.setFramePosition(0);
+    System.out.println("Stopped. Press P to play from the beginning.");
+  }
+
+  // goes back 5 seconds (but not before the start of the song)
+  public static void rewind() {
+    // the song loops, so % (remainder) finds the spot inside the song
+    long position = audioClip.getMicrosecondPosition() % audioClip.getMicrosecondLength();
+    long newPosition = position - FIVE_SECONDS;
+    if (newPosition < 0) {
+      newPosition = 0;
+    }
+    audioClip.setMicrosecondPosition(newPosition);
+    System.out.println("Rewound 5 seconds.");
+  }
+
+  // goes forward 5 seconds (but not past the end of the song)
+  public static void forward() {
+    long length = audioClip.getMicrosecondLength();
+    long position = audioClip.getMicrosecondPosition() % length;
+    long newPosition = position + FIVE_SECONDS;
+    if (newPosition >= length) {
+      newPosition = length - 1;
+    }
+    audioClip.setMicrosecondPosition(newPosition);
+    System.out.println("Forwarded 5 seconds.");
   }
 
   // read the audio library of music
