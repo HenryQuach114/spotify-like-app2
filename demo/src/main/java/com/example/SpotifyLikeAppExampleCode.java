@@ -15,7 +15,7 @@ private static Scanner input = new Scanner(System.in);
  
 
   private static String directoryPath =
-    "/Users/henryquach/Documents/GitHub/spotify-like-app/demo/src/main/java/com/example";
+    "/Users/henryquach/Documents/GitHub/spotify-like-app2/demo/src/main/java/com/example";
 
   // "main" makes this class a java app that can be executed
   public static void main(final String[] args) {
@@ -49,7 +49,7 @@ private static Scanner input = new Scanner(System.in);
     System.out.println("[H]ome");
     System.out.println("[S]earch by title");
     System.out.println("[L]ibrary");
-    System.out.println("[P]lay");
+    System.out.println("[F]avorites");
     System.out.println("[Q]uit");
 
     System.out.println("");
@@ -91,9 +91,9 @@ private static Scanner input = new Scanner(System.in);
         int songNumber = Integer.parseInt(input.nextLine());
         play(library, songNumber - 1);
         break;
-      case "p":
-        System.out.println("-->Play<--");
-        play(library, 3);
+      case "f":
+        System.out.println("-->Favorites<--");
+        favorites(library);
         break;
       case "q":
         System.out.println("-->Quit<--");
@@ -102,7 +102,34 @@ private static Scanner input = new Scanner(System.in);
         break;
     }
   }
+  /*
+   * lists only the favorite songs and lets the user play one
+   */
+  public static void favorites(Song[] library) {
+    // remember where each favorite is in the library
+    ArrayList<Integer> favoriteSongs = new ArrayList<>();
 
+    for (int i = 0; i < library.length; i++) {
+      if (library[i].isFavorite()) {
+        favoriteSongs.add(i);
+        System.out.println(favoriteSongs.size() + ". " + library[i].name() + " - " + library[i].artist());
+      }
+    }
+
+    if (favoriteSongs.isEmpty()) {
+      System.out.println("You have no favorite songs yet.");
+      return;
+    }
+
+    System.out.println();
+    System.out.print("Enter the number of the song to play: ");
+    try {
+      int songNumber = Integer.parseInt(input.nextLine());
+      play(library, favoriteSongs.get(songNumber - 1));
+    } catch (Exception e) {
+      System.out.println("That's not one of the numbers above.");
+    }
+  }
   /*
    * plays an audio file
    */
@@ -118,6 +145,7 @@ private static Scanner input = new Scanner(System.in);
     System.out.println("Artist: " + library[i].artist());
     System.out.println("Year: " + library[i].year());
     System.out.println("Genre: " + library[i].genre());
+    System.out.println("Favorite: " + library[i].isFavorite());
     System.out.println("File: " + filePath);
 
     // stop the current song from playing, before playing the next one

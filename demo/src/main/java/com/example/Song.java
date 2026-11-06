@@ -1,5 +1,7 @@
 package com.example;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Song {
 
   private String name;
@@ -7,6 +9,8 @@ public class Song {
   private String fileName;
   private String genre;
   private int year;
+  @SerializedName("IsFavorite") // saved in the json file as "IsFavorite"
+  private boolean isFavorite;
   
 
   // serializes attributes into a string
@@ -45,4 +49,12 @@ public class Song {
     return this.year;
   }
 
+  public boolean isFavorite() {
+    return this.isFavorite;
+  }
+
+  // switches the favorite between true and false (like a heart in Spotify)
+  public void toggleFavorite() {
+    this.isFavorite = !this.isFavorite;
+  }
 }
